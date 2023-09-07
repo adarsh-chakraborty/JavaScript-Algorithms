@@ -4,6 +4,7 @@ Pop to remove element from to stack
 Peek: Get the element on top of stack
 IsEmpty: Check if stack is empty
 Size: Get number of items in stack
+print: Visualize the elements in stack
 */
 
 class Stack {
