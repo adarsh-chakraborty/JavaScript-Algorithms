@@ -20,6 +20,7 @@ class LinkedList {
     return this.size;
   }
 
+  // O(1)
   prepend(value) {
     // head should always point to the first element as prepend is executed.
     const node = new Node(value);
@@ -47,6 +48,7 @@ class LinkedList {
     }
   }
 
+  // O(n)
   append(value) {
     // add element at end of the list
 
@@ -167,6 +169,33 @@ class LinkedList {
       return -1;
     }
   }
+
+  reverse() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    if (this.size === 1) {
+      return 1;
+    } else {
+      let prev = null;
+      let curr = this.head;
+
+      while (curr) {
+        // 4 steps
+        // #1 - Create a temp variable which points to the next node after current;
+        let next = curr.next;
+        // #2 - Make the current node point to reverse/previous;
+        curr.next = prev;
+        // #3 - Advance the previous pointer;
+        prev = curr;
+        // #4 - Advance the current pointer;
+        curr = next;
+      }
+      // Set the head pointer
+      this.head = prev;
+    }
+  }
 }
 
 const list = new LinkedList();
@@ -197,10 +226,12 @@ list.insert(70, 1);
 // list.removeValue(30);
 // list.removeValue(50);
 list.print();
-console.log(list.search(20));
-console.log(list.search(50));
-console.log(list.search(30));
-console.log(list.search(31));
+// console.log(list.search(20));
+// console.log(list.search(50));
+// console.log(list.search(30));
+// console.log(list.search(31));
+list.reverse();
+list.print();
 
 // Time Complexity of Prepend & append
 // prepend: Constant Big O(1)
