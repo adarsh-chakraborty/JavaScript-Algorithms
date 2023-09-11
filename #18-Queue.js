@@ -1,4 +1,5 @@
-/* 
+/*
+FIFO - First In First Out 
 enqueue(): Add an element to the queue
 dequeue(): Remove the oldest element from the queue
 Peek: Get the element on front of queue
