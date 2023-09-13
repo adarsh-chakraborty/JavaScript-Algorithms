@@ -31,17 +31,45 @@ class HashTable {
 
   set(key, value) {
     const index = this.hash(key);
-    this.table[index] = value;
+    // this.table[index] = value;
+    const bucket = this.table[index];
+    if (!bucket) {
+      this.table[index] = [[key, value]];
+    } else {
+      const sameKeyItem = bucket.find((item) => item[0] === key);
+      if (sameKeyItem) {
+        sameKeyItem[1] = value;
+      } else {
+        bucket.push([key, value]);
+      }
+    }
   }
 
   get(key) {
     const index = this.hash(key);
-    return this.table[index];
+    // return this.table[index];
+    const bucket = this.table[index];
+
+    if (bucket) {
+      const sameKeyItem = bucket.find((item) => item[0] === key);
+      if (sameKeyItem) {
+        return sameKeyItem[1]; // value
+      }
+    }
+    return undefined;
   }
 
   remove(key) {
     const index = this.hash(key);
-    this.table[index] = undefined;
+    // this.table[index] = undefined;
+    const bucket = this.table[index];
+
+    if (bucket) {
+      const sameKeyItem = bucket.find((item) => item[0] === key);
+      if (sameKeyItem) {
+        bucket.splice(bucket.indexOf(sameKeyItem), 1);
+      }
+    }
   }
 
   display() {
@@ -54,12 +82,23 @@ class HashTable {
 }
 
 const table = new HashTable(50);
+table.set("adarsh", "chakraborty");
 table.set("Adarsh", "Chakraborty");
-table.set("fruit", "Beer");
-console.log("Adarsh =>", table.get("Adarsh"));
+table.set("name", "Bruce");
+table.set("mane", "Cookie");
+table.set("kane", "Orange");
+table.set("lane", "Not Orange");
+
 console.log("adarsh =>", table.get("adarsh"));
-console.log("fruit =>", table.get("fruit"));
+console.log("Adarsh =>", table.get("Adarsh"));
+console.log("name =>", table.get("name"));
+console.log("mane =>", table.get("mane"));
+console.log("kane =>", table.get("kane"));
+console.log("lane =>", table.get("lane"));
+table.set("adarsh", "ADARSH");
+console.log("adarsh =>", table.get("adarsh"));
 table.display();
-console.log("Removing Fruit");
-table.remove("fruit");
+
+table.remove("kane");
+table.remove("lane");
 table.display();
